@@ -1,7 +1,24 @@
 [project]
 name = "nitty"
 version = "0.1.0"
-description = "Add your description here"
+description = "Professional Communities but fun"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "alembic>=1.16.5",
+    # Pin bcrypt until passlib supports the latest
+    "bcrypt==4.0.1",
+    "fastapi[standard]",
+    "passlib[bcrypt]>=1.7.4,<2.0.0",
+    "psycopg2>=2.9.10",
+    "pydantic-settings>=2.10.1",
+    "pyjwt<3.0.0,>=2.8.0",
+    "sqlmodel>=0.0.24",
+    "tenacity>=9.1.2",
+]
+
+[dependency-groups]
+dev = [
+    "coverage>=7.10.6",
+    "pytest>=8.4.2",
+]
