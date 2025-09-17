@@ -1,9 +1,13 @@
 import uuid
+from typing import TYPE_CHECKING
 
 from pydantic import EmailStr
-from sqlmodel import Field
+from sqlmodel import Field, Relationship
 
 from app.database import NittySQLModel
+
+if TYPE_CHECKING:
+    from app.communities.models import Community
 
 
 class UserBase(NittySQLModel):
@@ -32,6 +36,9 @@ class User(UserBase, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     hashed_password: str
 
+    # Relationships
+    created_communities: list["Community"] = Relationship(back_populates="creator")
+
 
 class UserPublic(UserBase):
     id: uuid.UUID
@@ -40,3 +47,11 @@ class UserPublic(UserBase):
 class Token(NittySQLModel):
     access_token: str
     token_type: str = "bearer"
+
+
+class TokenPayload(NittySQLModel):
+    sub: str | None = None
+
+
+# Rebuild models to resolve forward references
+User.model_rebuild()

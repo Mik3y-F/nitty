@@ -3,12 +3,14 @@ import logging
 from fastapi import APIRouter, FastAPI
 
 from app.auth.router import auth_router
+from app.communities.router import communities_router
 from app.config import settings
 
 logging.basicConfig(level=logging.INFO)
 
 api_router = APIRouter()
 api_router.include_router(auth_router)
+api_router.include_router(communities_router, prefix="/communities")
 
 
 app = FastAPI(
