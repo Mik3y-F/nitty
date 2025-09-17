@@ -21,6 +21,7 @@ if config.config_file_name is not None:
 
 import app.auth.models  # noqa: F401, E402
 import app.communities.models  # noqa: F401, E402
+import app.events.models  # noqa: F401, E402
 from app.database import NittySQLModel  # noqa: F401, E402
 
 target_metadata = NittySQLModel.metadata

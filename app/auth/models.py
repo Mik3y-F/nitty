@@ -8,6 +8,7 @@ from app.database import NittySQLModel
 
 if TYPE_CHECKING:
     from app.communities.models import Community
+    from app.events.models import Event
 
 
 class UserBase(NittySQLModel):
@@ -38,6 +39,7 @@ class User(UserBase, table=True):
 
     # Relationships
     created_communities: list["Community"] = Relationship(back_populates="creator")
+    created_events: list["Event"] = Relationship(back_populates="creator")
 
 
 class UserPublic(UserBase):
