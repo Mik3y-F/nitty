@@ -41,12 +41,12 @@ def detailed_health_check(session: DbSession):
             "status": "healthy",
             "service": "nitty",
             "database": "connected",
-            "version": "0.1.0"
+            "version": "0.1.0",
         }
     except Exception as e:
         return {
             "status": "unhealthy",
             "service": "nitty",
             "database": "disconnected",
-            "error": str(e)
+            "error": str(e),
         }
